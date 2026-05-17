@@ -15,7 +15,7 @@
 - **Disaster preparedness**: Japan experiences ~1,500 earthquakes/year. Foreign tourists have no quick way to find nearby shelters or hospitals
 - **Cultural access**: 29,000+ local festivals happen annually, but information exists only in Japanese
 
-**Omamori bridges this gap** — a single PWA that works in 8 languages, functions offline, and uses Gemma 4 for intelligent, contextual assistance.
+**Omamori bridges this gap** — a single PWA that works in 8 languages, functions **100% offline** (including AI via local Gemma 4), and provides intelligent, contextual assistance.
 
 ---
 
@@ -107,7 +107,9 @@ All data is cached in **IndexedDB** on first load (~37MB) for complete offline a
 | Festival browse & search | ✅ | IndexedDB |
 | Quick Phrases (8 languages) | ✅ | Static data + Web Speech API |
 | Earthquake/Medical guides | ✅ | Embedded content |
-| AI Chat & Translation | ❌ | Requires Ollama (local Gemma 4) |
+| AI Chat & Translation | ✅ | **Ollama local inference** (Gemma 4 runs on-device, no internet needed) |
+
+> **100% Offline**: Once Ollama + Gemma 4 model is installed and data is cached in IndexedDB, the entire app works without any internet connection. No cloud APIs, no external servers.
 
 ---
 
