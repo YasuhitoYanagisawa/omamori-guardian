@@ -23,16 +23,19 @@
       <span class="hdr-sub" data-i="tagline">AI Travel Guardian</span>
     </div>
     <div class="hdr-right">
-      <select id="lang" class="lang-sel" title="Language">
-        <option value="en">EN 🇬🇧</option>
-        <option value="ja">日本語 🇯🇵</option>
-        <option value="zh">中文 🇨🇳</option>
-        <option value="ko">한국어 🇰🇷</option>
-        <option value="es">ES 🇪🇸</option>
-        <option value="fr">FR 🇫🇷</option>
-        <option value="th">ไทย 🇹🇭</option>
-        <option value="vi">VI 🇻🇳</option>
-      </select>
+      <div id="lang-wrap" class="lang-wrap">
+        <button id="lang-btn" class="lang-sel" title="Language">EN 🇬🇧</button>
+        <div id="lang-menu" class="lang-menu">
+          <div class="lang-opt" data-v="en">EN 🇬🇧</div>
+          <div class="lang-opt" data-v="ja">日本語 🇯🇵</div>
+          <div class="lang-opt" data-v="zh">中文 🇨🇳</div>
+          <div class="lang-opt" data-v="ko">한국어 🇰🇷</div>
+          <div class="lang-opt" data-v="es">ES 🇪🇸</div>
+          <div class="lang-opt" data-v="fr">FR 🇫🇷</div>
+          <div class="lang-opt" data-v="th">ไทย 🇹🇭</div>
+          <div class="lang-opt" data-v="vi">VI 🇻🇳</div>
+        </div>
+      </div>
       <div class="hdr-status"><span id="dot" class="dot"></span><span id="dot-label" class="dot-label">Offline</span></div>
     </div>
   </header>

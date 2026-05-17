@@ -43,14 +43,39 @@ const PH={
 
 document.addEventListener('DOMContentLoaded',init);
 async function init(){
-  setupTabs();setupChips();setupSearch();setupPhrases('restaurant');
-  document.getElementById('lang').addEventListener('change',e=>{
-    applyLang(e.target.value);localStorage.setItem('lang',e.target.value);
-    render(); // re-render festival cards with translated buttons
-    renderPhrases(document.querySelector('#pcats .chip.on')?.dataset.c||'restaurant');
-  });
+  // Custom language dropdown (won't close on focus loss during screen recording)
+  const langBtn=document.getElementById('lang-btn');
+  const langWrap=document.getElementById('lang-wrap');
+  const langMenu=document.getElementById('lang-menu');
+  // Virtual element so all getElementById('lang').value calls still work
+  const langProxy={value:'en'};
+  // Monkey-patch: make getElementById('lang') return our proxy
+  const origGetById=document.getElementById.bind(document);
+  document.getElementById=function(id){if(id==='lang')return langProxy;return origGetById(id);};
+
+  // Restore saved lang BEFORE setup calls
   const saved=localStorage.getItem('lang')||'en';
-  document.getElementById('lang').value=saved;
+  langProxy.value=saved;
+  const savedOpt=langMenu.querySelector(`[data-v="${saved}"]`);
+  if(savedOpt){langBtn.textContent=savedOpt.textContent;savedOpt.classList.add('active');}
+
+  setupTabs();setupChips();setupSearch();setupPhrases('restaurant');
+
+  langBtn.addEventListener('click',e=>{e.stopPropagation();langWrap.classList.toggle('open');});
+  document.addEventListener('click',e=>{if(!langWrap.contains(e.target))langWrap.classList.remove('open');});
+  langMenu.querySelectorAll('.lang-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      const v=opt.dataset.v;
+      langProxy.value=v;
+      langBtn.textContent=opt.textContent;
+      langMenu.querySelectorAll('.lang-opt').forEach(o=>o.classList.remove('active'));
+      opt.classList.add('active');
+      langWrap.classList.remove('open');
+      applyLang(v);localStorage.setItem('lang',v);
+      render();
+      renderPhrases(document.querySelector('#pcats .chip.on')?.dataset.c||'restaurant');
+    });
+  });
   applyLang(saved);
   checkOnline();window.addEventListener('online',checkOnline);window.addEventListener('offline',checkOnline);
   checkOllama();
