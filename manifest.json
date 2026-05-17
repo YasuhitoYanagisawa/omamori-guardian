@@ -1,0 +1,13 @@
+{
+  "name": "Omamori — AI Travel Guardian",
+  "short_name": "Omamori",
+  "description": "Offline-first AI travel guardian for Japan powered by Gemma 4. 29,000+ festivals, multilingual phrases, emergency info.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0118",
+  "theme_color": "#0a0118",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩️</text></svg>", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

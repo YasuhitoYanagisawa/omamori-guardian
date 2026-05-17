@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Omamori — AI Travel Guardian for Japan</title>
+  <meta name="description" content="Offline-first AI travel guardian powered by Gemma 4. Discover 29,000+ Japanese festivals, communicate effortlessly, and stay safe.">
+  <meta name="theme-color" content="#0a0118">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩️</text></svg>">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header" translate="no">
+    <div class="hdr-left">
+      <span class="hdr-logo">⛩️</span>
+      <h1 class="hdr-title">Omamori</h1>
+      <span class="hdr-sub" data-i="tagline">AI Travel Guardian</span>
+    </div>
+    <div class="hdr-right">
+      <select id="lang" class="lang-sel" title="Language">
+        <option value="en">EN 🇬🇧</option>
+        <option value="ja">日本語 🇯🇵</option>
+        <option value="zh">中文 🇨🇳</option>
+        <option value="ko">한국어 🇰🇷</option>
+        <option value="es">ES 🇪🇸</option>
+        <option value="fr">FR 🇫🇷</option>
+        <option value="th">ไทย 🇹🇭</option>
+        <option value="vi">VI 🇻🇳</option>
+      </select>
+      <div class="hdr-status"><span id="dot" class="dot"></span><span id="dot-label" class="dot-label">Offline</span></div>
+    </div>
+  </header>
+
+  <!-- TABS (3 tabs) -->
+  <nav id="tabs" translate="no">
+    <button class="tab active" data-t="discover"><span class="tab-ico">🏮</span><span data-i="tab_discover">Discover</span></button>
+    <button class="tab" data-t="assistant"><span class="tab-ico">🤖</span><span data-i="tab_assistant">AI Assistant</span></button>
+    <button class="tab" data-t="emergency"><span class="tab-ico">🚨</span><span data-i="tab_emergency">Emergency</span></button>
+  </nav>
+
+  <!-- LOADER -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="lantern">🏮</div>
+      <p class="loader-title" data-i="loading">Preparing your guardian…</p>
+      <div class="prog"><div id="prog-fill" class="prog-fill"></div></div>
+      <p id="loader-msg" class="loader-msg">Loading data…</p>
+    </div>
+  </div>
+
+  <!-- ===== DISCOVER ===== -->
+  <main id="p-discover" class="page active">
+    <div id="ai-reco" class="reco-box" style="display:none">
+      <div class="reco-hdr"><span data-i="ai_picks">🎯 AI Picks for You</span><span class="reco-badge">Gemma 4</span></div>
+      <div id="reco-body" class="reco-body"></div>
+    </div>
+    <div class="srch-wrap">
+      <input id="srch" type="search" class="srch" data-pi="search_ph">
+      <span class="srch-ico">🔍</span>
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip on" data-v="">All</button>
+      <button class="chip" data-v="神社">⛩ Shrine</button>
+      <button class="chip" data-v="花火">🎆 Fireworks</button>
+      <button class="chip" data-v="盆踊り">💃 Bon Odori</button>
+      <button class="chip" data-v="桜">🌸 Sakura</button>
+      <button class="chip" data-v="伝統">🎭 Traditional</button>
+      <button class="chip" data-v="グルメ">🍜 Gourmet</button>
+      <button class="chip" data-v="音楽">🎵 Music</button>
+    </div>
+    <div class="filter-row">
+      <select id="f-pref" class="fsel"><option value="" data-i="all_pref">All Prefectures</option></select>
+      <select id="f-month" class="fsel">
+        <option value="" data-i="all_months">All Months</option>
+        <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+        <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+        <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+        <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+      </select>
+    </div>
+    <div class="count-bar"><span id="count">0</span> <span data-i="festivals_found">festivals found</span></div>
+    <div id="flist" class="flist"></div>
+    <button id="more" class="more-btn" style="display:none" data-i="load_more">Load more festivals</button>
+  </main>
+
+  <!-- ===== AI ASSISTANT (chat first, phrases below) ===== -->
+  <main id="p-assistant" class="page">
+    <div class="ai-hero">
+      <div class="ai-avatar">🤖</div>
+      <h2 data-i="ai_title">Gemma 4 AI Assistant</h2>
+      <p data-i="ai_desc">Your multilingual travel guide. Ask about festivals, translate phrases, get travel advice — powered by Gemma 4.</p>
+      <div id="ai-conn" class="ai-conn"><span class="dot"></span><span id="ai-conn-text">Checking…</span></div>
+    </div>
+    <!-- Suggested prompts -->
+    <div class="suggest-grid">
+      <button class="suggest" onclick="sendSuggestion(this)" data-i="sug1">🏮 Festivals near Tokyo this month?</button>
+      <button class="suggest" onclick="sendSuggestion(this)" data-i="sug2">🍣 How to order sushi like a local?</button>
+      <button class="suggest" onclick="sendSuggestion(this)" data-i="sug3">🚃 How to use JR Pass?</button>
+      <button class="suggest" onclick="sendSuggestion(this)" data-i="sug4">🌸 Best time to visit Kyoto?</button>
+    </div>
+    <!-- Chat -->
+    <div id="chat" class="chat"></div>
+    <!-- Phrase Quick Access (always visible above chat bar) -->
+    <div class="phrase-panel" id="phrase-panel">
+      <div class="phrase-panel-hdr">
+        <span data-i="quick_phrases">📋 Quick Phrases</span>
+        <button class="phrase-toggle" onclick="document.getElementById('phrase-panel').classList.toggle('collapsed')">▾</button>
+      </div>
+      <div class="phrase-panel-body">
+        <div class="chips phrase-chips" id="pcats">
+          <button class="chip on" data-c="restaurant">🍽️</button>
+          <button class="chip" data-c="transport">🚃</button>
+          <button class="chip" data-c="hotel">🏨</button>
+          <button class="chip" data-c="medical">🏥</button>
+          <button class="chip" data-c="shopping">🛍️</button>
+          <button class="chip" data-c="general">🙏</button>
+        </div>
+        <div id="plist" class="phrase-grid"></div>
+      </div>
+    </div>
+    <div class="chat-bar">
+      <button id="chat-mic" class="chat-mic" title="Voice input">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3z"/><path d="M19 11a1 1 0 10-2 0 5 5 0 01-10 0 1 1 0 10-2 0 7 7 0 006 6.92V20H8a1 1 0 100 2h8a1 1 0 100-2h-3v-2.08A7 7 0 0019 11z"/></svg>
+      </button>
+      <input id="chat-in" class="chat-in" data-pi="chat_ph">
+      <button id="chat-send" class="chat-send" title="Send">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+      </button>
+    </div>
+  </main>
+
+  <!-- ===== EMERGENCY ===== -->
+  <main id="p-emergency" class="page">
+    <div class="emer-banner" data-i="emer_banner">🚨 EMERGENCY — Works Offline</div>
+
+    <!-- Quick Dial -->
+    <div class="emer-grid">
+      <a href="tel:110" class="emer-card"><span class="emer-ico">👮</span><span class="emer-num">110</span><span data-i="police">Police</span></a>
+      <a href="tel:119" class="emer-card"><span class="emer-ico">🚑</span><span class="emer-num">119</span><span data-i="ambulance">Fire & Ambulance</span></a>
+      <a href="tel:118" class="emer-card"><span class="emer-ico">⚓</span><span class="emer-num">118</span><span data-i="coast">Coast Guard</span></a>
+      <a href="tel:05038162787" class="emer-card"><span class="emer-ico">🌏</span><span class="emer-num emer-small">050-3816-2787</span><span data-i="hotline">Visitor Hotline 24h</span></a>
+      <a href="tel:0352858181" class="emer-card"><span class="emer-ico">🏥</span><span class="emer-num emer-small">03-5285-8181</span><span data-i="amda">AMDA Medical (Multilingual)</span></a>
+      <a href="tel:171" class="emer-card"><span class="emer-ico">📞</span><span class="emer-num">171</span><span data-i="disaster_dial">Disaster Msg Dial</span></a>
+    </div>
+
+    <!-- Nearby Map -->
+    <div class="map-section">
+      <h3 data-i="nearby_title">📍 Nearby Facilities</h3>
+      <div class="map-btns">
+        <button class="btn btn-gold" onclick="showMap('shelter')" data-i="find_shelter">🏛️ Find Shelters</button>
+        <button class="btn btn-gold" onclick="showMap('hospital')" data-i="find_hospital">🏥 Find Hospitals</button>
+      </div>
+      <div id="map" class="map-container" style="display:none"></div>
+      <div id="map-list" class="flist" lang="ja" style="margin-top:10px"></div>
+    </div>
+
+    <!-- Earthquake Guide -->
+    <div class="emer-section">
+      <h3 onclick="this.parentElement.classList.toggle('open')"><span data-i="eq_title">🌊 Earthquake — What to Do</span> <span class="arrow">▸</span></h3>
+      <ol class="emer-steps">
+        <li><b>DROP, COVER, HOLD ON</b> — <span data-i="eq1">Get under a sturdy table</span></li>
+        <li><b data-i="eq2">Do NOT rush outside</b> <span data-i="eq2b">during shaking</span></li>
+        <li data-i="eq3">After shaking — check injuries, turn off gas</li>
+        <li data-i="eq4">Move to open areas away from buildings</li>
+        <li data-i="eq5">Near coast? Move to higher ground (tsunami)</li>
+        <li data-i="eq6">Check NHK World for updates</li>
+      </ol>
+    </div>
+
+    <!-- Show Cards -->
+    <div class="emer-section">
+      <h3 onclick="this.parentElement.classList.toggle('open')"><span data-i="sc_title">💊 Medical Show Cards</span> <span class="arrow">▸</span></h3>
+      <div class="emer-steps">
+        <div class="showcard" onclick="showOverlay('私は外国人観光客です。\n英語を話せる医師はいますか？','I am a foreign tourist. Is there an English-speaking doctor?')">
+          <p class="sc-label" data-i="sc1_label">🏥 Show at Hospital</p>
+          <p class="sc-jp">私は外国人観光客です。英語を話せる医師はいますか？</p>
+        </div>
+        <div class="showcard" onclick="showOverlay('救急です。外国人です。\n英語でお願いします。','Emergency. I am a foreigner. English please.')">
+          <p class="sc-label" data-i="sc2_label">📞 When calling 119</p>
+          <p class="sc-jp">救急です。外国人です。英語でお願いします。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="emer-section open">
+      <h3 data-i="resources">🔗 Useful Resources</h3>
+      <div class="emer-steps">
+        <a href="https://www.nhk.or.jp/nhkworld/" target="_blank" class="emer-link">📺 NHK World (English news & disaster alerts)</a>
+        <a href="https://www.jma.go.jp/bosai/map.html" target="_blank" class="emer-link">🌊 JMA Disaster Map (Real-time earthquake/tsunami)</a>
+        <a href="https://www.jnto.go.jp/emergency/eng/mi_guide.html" target="_blank" class="emer-link">🗾 JNTO Visitor Safety Guide</a>
+        <a href="https://www.mhlw.go.jp/english/" target="_blank" class="emer-link">🏥 Ministry of Health (English)</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- OVERLAY -->
+  <div id="overlay" class="overlay" onclick="this.style.display='none'">
+    <div class="overlay-card">
+      <p id="ov-jp" class="ov-jp"></p>
+      <p id="ov-ro" class="ov-ro"></p>
+      <p class="ov-hint" data-i="tap_close">Tap anywhere to close</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

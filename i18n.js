@@ -1,0 +1,177 @@
+/* Omamori i18n — 8 languages */
+const I18N = {
+  en: {
+    tagline:"AI Travel Guardian", tab_discover:"Discover", tab_assistant:"AI Assistant", tab_emergency:"Emergency",
+    loading:"Preparing your guardian…", search_ph:"Search 29,000+ festivals…", all_pref:"All Prefectures", all_months:"All Months",
+    festivals_found:"festivals found", load_more:"Load more festivals", ai_picks:"🎯 AI Picks for You",
+    ai_title:"Gemma 4 AI Assistant", ai_desc:"Your multilingual travel guide. Ask about festivals, translate phrases, get travel advice — powered by Gemma 4.",
+    quick_phrases:"📋 Quick Phrases — tap to expand",
+    sug1:"🏮 Festivals near Tokyo this month?", sug2:"🍣 How to order sushi like a local?", sug3:"🚃 How to use the JR Pass?", sug4:"🌸 Best time to visit Kyoto?",
+    chat_welcome:"Hello! I'm your AI travel guide for Japan. Ask me anything — translations, cultural tips, festival info, or emergency help. 🇯🇵",
+    chat_ph:"Ask about Japan, translate phrases…",
+    emer_banner:"🚨 EMERGENCY — Works Offline", police:"Police", ambulance:"Fire & Ambulance", coast:"Coast Guard",
+    hotline:"Visitor Hotline 24h", amda:"AMDA Medical (Multilingual)", disaster_dial:"Disaster Msg Dial",
+    nearby_title:"📍 Nearby Facilities", find_shelter:"🏛️ Find Shelters", find_hospital:"🏥 Find Hospitals",
+    eq_title:"🌊 Earthquake — What to Do", eq1:"Get under a sturdy table", eq2:"Do NOT rush outside", eq2b:"during shaking",
+    eq3:"After shaking — check injuries, turn off gas", eq4:"Move to open areas away from buildings",
+    eq5:"Near coast? Move to higher ground (tsunami)", eq6:"Check NHK World for updates",
+    sc_title:"💊 Medical Show Cards", sc1_label:"🏥 Show at Hospital", sc2_label:"📞 When calling 119",
+    resources:"🔗 Useful Resources", tap_close:"Tap anywhere to close",
+    btn_map:"📍 Map", btn_translate:"🌐 Translate", btn_ask:"🤖 Ask AI", btn_speak:"🔊 Speak", btn_show:"📋 Show",
+    navigate:"Navigate", shelter:"Shelter", hospital:"Hospital", distance:"Distance"
+  },
+  ja: {
+    tagline:"AI旅のお守り", tab_discover:"発見", tab_assistant:"AIアシスタント", tab_emergency:"緊急",
+    loading:"お守りを準備中…", search_ph:"29,000件以上の祭りを検索…", all_pref:"全都道府県", all_months:"全ての月",
+    festivals_found:"件のお祭り", load_more:"もっと見る", ai_picks:"🎯 おすすめ",
+    ai_title:"Gemma 4 AIアシスタント", ai_desc:"多言語対応の旅行ガイドです。お祭り情報、翻訳、旅行アドバイスなど何でもお聞きください。",
+    quick_phrases:"📋 よく使うフレーズ",
+    sug1:"🏮 今月の東京近くの祭りは？", sug2:"🍣 寿司の注文方法は？", sug3:"🚃 JRパスの使い方は？", sug4:"🌸 京都のベストシーズンは？",
+    chat_welcome:"こんにちは！日本旅行のAIガイドです。翻訳、文化、お祭り、緊急時の助けなど、何でもお聞きください。🇯🇵",
+    chat_ph:"日本について質問、翻訳…",
+    emer_banner:"🚨 緊急情報 — オフラインでも使えます", police:"警察", ambulance:"消防・救急", coast:"海上保安庁",
+    hotline:"訪日旅行者ホットライン 24時間", amda:"AMDA多言語医療", disaster_dial:"災害用伝言ダイヤル",
+    nearby_title:"📍 近くの施設", find_shelter:"🏛️ 避難所を探す", find_hospital:"🏥 病院を探す",
+    eq_title:"🌊 地震 — 対処法", eq1:"丈夫な机の下に入る", eq2:"揺れている間は外に出ない", eq2b:"",
+    eq3:"揺れが収まったら — 怪我の確認、ガスを止める", eq4:"建物から離れた広い場所へ移動",
+    eq5:"海岸近く？高台へ避難（津波）", eq6:"NHKワールドで最新情報を確認",
+    sc_title:"💊 医療カード", sc1_label:"🏥 病院で見せる", sc2_label:"📞 119に電話する時",
+    resources:"🔗 便利なリンク", tap_close:"どこかをタップして閉じる",
+    btn_map:"📍 地図", btn_translate:"🌐 翻訳", btn_ask:"🤖 AIに聞く", btn_speak:"🔊 再生", btn_show:"📋 表示",
+    navigate:"案内", shelter:"避難所", hospital:"病院", distance:"距離"
+  },
+  zh: {
+    tagline:"AI旅行守护", tab_discover:"发现", tab_assistant:"AI助手", tab_emergency:"紧急",
+    loading:"正在准备你的守护者…", search_ph:"搜索29,000+个节日…", all_pref:"所有都道府县", all_months:"所有月份",
+    festivals_found:"个节日", load_more:"加载更多", ai_picks:"🎯 AI推荐",
+    ai_title:"Gemma 4 AI助手", ai_desc:"你的多语言旅行向导。询问节日、翻译短语、获取旅行建议 — Gemma 4驱动。",
+    quick_phrases:"📋 常用短语",
+    sug1:"🏮 这个月东京附近有什么节日？", sug2:"🍣 如何像当地人一样点寿司？", sug3:"🚃 如何使用JR通票？", sug4:"🌸 访问京都的最佳时间？",
+    chat_welcome:"你好！我是你的日本旅行AI向导。翻译、文化、节日、紧急帮助，随时问我。🇯🇵",
+    chat_ph:"关于日本的问题、翻译…",
+    emer_banner:"🚨 紧急信息 — 离线可用", police:"警察", ambulance:"消防和救护", coast:"海上保安厅",
+    hotline:"游客热线 24小时", amda:"AMDA多语言医疗", disaster_dial:"灾害留言电话",
+    nearby_title:"📍 附近设施", find_shelter:"🏛️ 查找避难所", find_hospital:"🏥 查找医院",
+    eq_title:"🌊 地震 — 应对方法", eq1:"躲到坚固的桌子下", eq2:"不要慌忙跑出去", eq2b:"震动期间",
+    eq3:"震动停止后 — 检查伤情，关闭煤气", eq4:"远离建筑物，到开阔地带",
+    eq5:"靠近海岸？前往高处（海啸）", eq6:"查看NHK World获取最新信息",
+    sc_title:"💊 医疗卡", sc1_label:"🏥 在医院出示", sc2_label:"📞 拨打119时",
+    resources:"🔗 有用资源", tap_close:"点击任意处关闭",
+    btn_map:"📍 地图", btn_translate:"🌐 翻译", btn_ask:"🤖 问AI", btn_speak:"🔊 播放", btn_show:"📋 展示",
+    navigate:"导航", shelter:"避难所", hospital:"医院", distance:"距离"
+  },
+  ko: {
+    tagline:"AI 여행 수호자", tab_discover:"발견", tab_assistant:"AI 어시스턴트", tab_emergency:"긴급",
+    loading:"수호자를 준비 중…", search_ph:"29,000+ 축제 검색…", all_pref:"전체 도도부현", all_months:"전체 월",
+    festivals_found:"개 축제", load_more:"더 보기", ai_picks:"🎯 AI 추천",
+    ai_title:"Gemma 4 AI 어시스턴트", ai_desc:"다국어 여행 가이드. 축제, 번역, 여행 조언을 물어보세요 — Gemma 4 기반.",
+    quick_phrases:"📋 자주 쓰는 표현",
+    sug1:"🏮 이번 달 도쿄 근처 축제?", sug2:"🍣 현지인처럼 스시 주문하는 법?", sug3:"🚃 JR패스 사용법?", sug4:"🌸 교토 방문 최적기?",
+    chat_welcome:"안녕하세요! 일본 여행 AI 가이드입니다. 번역, 문화, 축제, 긴급 도움 등 무엇이든 물어보세요. 🇯🇵",
+    chat_ph:"일본에 대해 질문, 번역…",
+    emer_banner:"🚨 긴급 정보 — 오프라인 사용 가능", police:"경찰", ambulance:"소방 & 구급", coast:"해상보안청",
+    hotline:"방문자 핫라인 24시간", amda:"AMDA 다국어 의료", disaster_dial:"재해 메시지 다이얼",
+    nearby_title:"📍 근처 시설", find_shelter:"🏛️ 대피소 찾기", find_hospital:"🏥 병원 찾기",
+    eq_title:"🌊 지진 — 대처법", eq1:"튼튼한 테이블 아래로", eq2:"흔들리는 동안 밖으로 나가지 마세요", eq2b:"",
+    eq3:"흔들림 후 — 부상 확인, 가스 차단", eq4:"건물에서 멀리 떨어진 넓은 곳으로",
+    eq5:"해안 근처? 높은 곳으로 대피 (쓰나미)", eq6:"NHK World에서 최신 정보 확인",
+    sc_title:"💊 의료 카드", sc1_label:"🏥 병원에서 보여주기", sc2_label:"📞 119 전화 시",
+    resources:"🔗 유용한 링크", tap_close:"아무 곳이나 탭하여 닫기",
+    btn_map:"📍 지도", btn_translate:"🌐 번역", btn_ask:"🤖 AI에게", btn_speak:"🔊 듣기", btn_show:"📋 보기",
+    navigate:"길안내", shelter:"대피소", hospital:"병원", distance:"거리"
+  },
+  es: {
+    tagline:"Guardián de Viaje IA", tab_discover:"Descubrir", tab_assistant:"Asistente IA", tab_emergency:"Emergencia",
+    loading:"Preparando tu guardián…", search_ph:"Buscar 29,000+ festivales…", all_pref:"Todas las Prefecturas", all_months:"Todos los Meses",
+    festivals_found:"festivales", load_more:"Cargar más", ai_picks:"🎯 Recomendaciones IA",
+    ai_title:"Asistente IA Gemma 4", ai_desc:"Tu guía multilingüe. Pregunta sobre festivales, traducciones, consejos — con Gemma 4.",
+    quick_phrases:"📋 Frases rápidas",
+    sug1:"🏮 ¿Festivales cerca de Tokio este mes?", sug2:"🍣 ¿Cómo pedir sushi como un local?", sug3:"🚃 ¿Cómo usar el JR Pass?", sug4:"🌸 ¿Mejor época para Kioto?",
+    chat_welcome:"¡Hola! Soy tu guía de viaje IA para Japón. Pregúntame sobre traducciones, festivales, cultura o emergencias. 🇯🇵",
+    chat_ph:"Pregunta sobre Japón, traduce frases…",
+    emer_banner:"🚨 EMERGENCIA — Funciona sin conexión", police:"Policía", ambulance:"Bomberos y Ambulancia", coast:"Guardia Costera",
+    hotline:"Línea Visitantes 24h", amda:"AMDA Médico (Multilingüe)", disaster_dial:"Buzón de Desastres",
+    nearby_title:"📍 Instalaciones Cercanas", find_shelter:"🏛️ Buscar Refugios", find_hospital:"🏥 Buscar Hospitales",
+    eq_title:"🌊 Terremoto — Qué hacer", eq1:"Métete debajo de una mesa resistente", eq2:"NO salgas corriendo", eq2b:"durante el temblor",
+    eq3:"Después — revisa heridas, cierra el gas", eq4:"Ve a áreas abiertas lejos de edificios",
+    eq5:"¿Cerca de la costa? Ve a terreno elevado", eq6:"Consulta NHK World",
+    sc_title:"💊 Tarjetas Médicas", sc1_label:"🏥 Mostrar en Hospital", sc2_label:"📞 Al llamar al 119",
+    resources:"🔗 Recursos Útiles", tap_close:"Toca para cerrar",
+    btn_map:"📍 Mapa", btn_translate:"🌐 Traducir", btn_ask:"🤖 Preguntar IA", btn_speak:"🔊 Escuchar", btn_show:"📋 Mostrar",
+    navigate:"Navegar", shelter:"Refugio", hospital:"Hospital", distance:"Distancia"
+  },
+  fr: {
+    tagline:"Gardien de Voyage IA", tab_discover:"Découvrir", tab_assistant:"Assistant IA", tab_emergency:"Urgence",
+    loading:"Préparation…", search_ph:"Chercher 29,000+ festivals…", all_pref:"Toutes les Préfectures", all_months:"Tous les Mois",
+    festivals_found:"festivals", load_more:"Charger plus", ai_picks:"🎯 Sélection IA",
+    ai_title:"Assistant IA Gemma 4", ai_desc:"Votre guide multilingue. Festivals, traductions, conseils — propulsé par Gemma 4.",
+    quick_phrases:"📋 Phrases rapides",
+    sug1:"🏮 Festivals près de Tokyo ce mois?", sug2:"🍣 Comment commander des sushis?", sug3:"🚃 Comment utiliser le JR Pass?", sug4:"🌸 Meilleure saison pour Kyoto?",
+    chat_welcome:"Bonjour! Je suis votre guide IA pour le Japon. Traductions, culture, festivals ou urgences — demandez-moi! 🇯🇵",
+    chat_ph:"Question sur le Japon, traductions…",
+    emer_banner:"🚨 URGENCE — Fonctionne hors ligne", police:"Police", ambulance:"Pompiers & Ambulance", coast:"Garde-côtes",
+    hotline:"Ligne Visiteurs 24h", amda:"AMDA Médical (Multilingue)", disaster_dial:"Message Catastrophe",
+    nearby_title:"📍 Installations Proches", find_shelter:"🏛️ Trouver Abris", find_hospital:"🏥 Trouver Hôpitaux",
+    eq_title:"🌊 Séisme — Que faire", eq1:"Sous une table solide", eq2:"NE sortez PAS", eq2b:"pendant les secousses",
+    eq3:"Après — vérifiez blessures, coupez le gaz", eq4:"Éloignez-vous des bâtiments",
+    eq5:"Près de la côte? Montez en hauteur", eq6:"Consultez NHK World",
+    sc_title:"💊 Cartes Médicales", sc1_label:"🏥 À l'hôpital", sc2_label:"📞 En appelant le 119",
+    resources:"🔗 Ressources Utiles", tap_close:"Appuyez pour fermer",
+    btn_map:"📍 Carte", btn_translate:"🌐 Traduire", btn_ask:"🤖 Demander IA", btn_speak:"🔊 Écouter", btn_show:"📋 Afficher",
+    navigate:"Naviguer", shelter:"Abri", hospital:"Hôpital", distance:"Distance"
+  },
+  th: {
+    tagline:"ผู้พิทักษ์การเดินทาง AI", tab_discover:"ค้นพบ", tab_assistant:"AI ผู้ช่วย", tab_emergency:"ฉุกเฉิน",
+    loading:"กำลังเตรียม…", search_ph:"ค้นหา 29,000+ เทศกาล…", all_pref:"ทุกจังหวัด", all_months:"ทุกเดือน",
+    festivals_found:"เทศกาล", load_more:"โหลดเพิ่ม", ai_picks:"🎯 AI แนะนำ",
+    ai_title:"Gemma 4 AI ผู้ช่วย", ai_desc:"ไกด์หลายภาษา ถามเกี่ยวกับเทศกาล แปลภาษา ขอคำแนะนำ",
+    quick_phrases:"📋 วลีด่วน",
+    sug1:"🏮 เทศกาลใกล้โตเกียว?", sug2:"🍣 สั่งซูชิยังไง?", sug3:"🚃 ใช้ JR Pass ยังไง?", sug4:"🌸 ไปเกียวโตเมื่อไหร่ดี?",
+    chat_welcome:"สวัสดี! ฉันเป็นไกด์ AI สำหรับญี่ปุ่น ถามอะไรก็ได้ 🇯🇵",
+    chat_ph:"ถามเกี่ยวกับญี่ปุ่น…",
+    emer_banner:"🚨 ฉุกเฉิน — ใช้ได้แม้ออฟไลน์", police:"ตำรวจ", ambulance:"ดับเพลิง & รถพยาบาล", coast:"หน่วยยามฝั่ง",
+    hotline:"สายด่วนนักท่องเที่ยว 24 ชม.", amda:"AMDA แพทย์หลายภาษา", disaster_dial:"สายด่วนภัยพิบัติ",
+    nearby_title:"📍 สถานที่ใกล้เคียง", find_shelter:"🏛️ หาที่หลบภัย", find_hospital:"🏥 หาโรงพยาบาล",
+    eq_title:"🌊 แผ่นดินไหว", eq1:"หลบใต้โต๊ะ", eq2:"อย่าวิ่งออกไปข้างนอก", eq2b:"ขณะสั่น",
+    eq3:"หลังสั่น — ตรวจอาการบาดเจ็บ ปิดแก๊ส", eq4:"ย้ายไปที่โล่ง",
+    eq5:"ใกล้ชายฝั่ง? ขึ้นที่สูง", eq6:"ดู NHK World",
+    sc_title:"💊 บัตรแพทย์", sc1_label:"🏥 แสดงที่โรงพยาบาล", sc2_label:"📞 เมื่อโทร 119",
+    resources:"🔗 ลิงก์", tap_close:"แตะเพื่อปิด",
+    btn_map:"📍 แผนที่", btn_translate:"🌐 แปล", btn_ask:"🤖 ถาม AI", btn_speak:"🔊 ฟัง", btn_show:"📋 แสดง",
+    navigate:"นำทาง", shelter:"ที่หลบภัย", hospital:"โรงพยาบาล", distance:"ระยะ"
+  },
+  vi: {
+    tagline:"Hộ vệ du lịch AI", tab_discover:"Khám phá", tab_assistant:"Trợ lý AI", tab_emergency:"Khẩn cấp",
+    loading:"Đang chuẩn bị…", search_ph:"Tìm 29,000+ lễ hội…", all_pref:"Tất cả tỉnh", all_months:"Tất cả tháng",
+    festivals_found:"lễ hội", load_more:"Tải thêm", ai_picks:"🎯 AI gợi ý",
+    ai_title:"Trợ lý AI Gemma 4", ai_desc:"Hướng dẫn đa ngôn ngữ. Hỏi về lễ hội, dịch thuật, mẹo du lịch.",
+    quick_phrases:"📋 Cụm từ nhanh",
+    sug1:"🏮 Lễ hội gần Tokyo tháng này?", sug2:"🍣 Gọi sushi như dân địa phương?", sug3:"🚃 Dùng JR Pass thế nào?", sug4:"🌸 Thời điểm tốt nhất đến Kyoto?",
+    chat_welcome:"Xin chào! Tôi là hướng dẫn AI du lịch Nhật Bản. Hãy hỏi bất cứ điều gì! 🇯🇵",
+    chat_ph:"Hỏi về Nhật Bản, dịch…",
+    emer_banner:"🚨 KHẨN CẤP — Hoạt động ngoại tuyến", police:"Cảnh sát", ambulance:"Cứu hỏa & Xe cấp cứu", coast:"Cảnh sát biển",
+    hotline:"Đường dây du khách 24h", amda:"AMDA Y tế đa ngôn ngữ", disaster_dial:"Đường dây thiên tai",
+    nearby_title:"📍 Cơ sở gần đây", find_shelter:"🏛️ Tìm nơi trú ẩn", find_hospital:"🏥 Tìm bệnh viện",
+    eq_title:"🌊 Động đất", eq1:"Chui xuống bàn chắc chắn", eq2:"KHÔNG chạy ra ngoài", eq2b:"khi đang rung",
+    eq3:"Sau rung — kiểm tra thương tích, tắt gas", eq4:"Di chuyển đến nơi thoáng",
+    eq5:"Gần biển? Lên cao (sóng thần)", eq6:"Xem NHK World",
+    sc_title:"💊 Thẻ y tế", sc1_label:"🏥 Đưa tại bệnh viện", sc2_label:"📞 Khi gọi 119",
+    resources:"🔗 Tài nguyên hữu ích", tap_close:"Chạm để đóng",
+    btn_map:"📍 Bản đồ", btn_translate:"🌐 Dịch", btn_ask:"🤖 Hỏi AI", btn_speak:"🔊 Nghe", btn_show:"📋 Hiện",
+    navigate:"Chỉ đường", shelter:"Nơi trú ẩn", hospital:"Bệnh viện", distance:"Khoảng cách"
+  }
+};
+
+function applyLang(lang){
+  const t=I18N[lang]||I18N.en;
+  // text content
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const k=el.dataset.i;
+    if(t[k])el.textContent=t[k];
+  });
+  // placeholders
+  document.querySelectorAll('[data-pi]').forEach(el=>{
+    const k=el.dataset.pi;
+    if(t[k])el.placeholder=t[k];
+  });
+}
